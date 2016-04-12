@@ -7,10 +7,6 @@
 // $("#header").prepend(formattedRole);
 // $("#header").prepend(formattedName);
 
-// var data = 
-// ["Euler", "James", "Course Developer", "myFunc"];
-
-// $("#main").append(data.length);
 
 var bio = {
 	"name": "Tian Xia",
@@ -21,11 +17,39 @@ var bio = {
 		"email": "tian@example.com",
 		"github": "ainovate",
 		"twitter": "@ainovate",
-		"location": "China",
+		"location": "China"
 	},
-	"welcomeMessage": "Very Nice to see you.",
+	"welcomeMessage": "very nice to see you.",
 	"skills": ["joking", "procrastinate all the time", "denail everything"],
 	"bio pic": "images/fry.jpg",
-};
+}
 
-$("#main").append(bio.name);
+var education = {
+	"schools": [
+	  {
+		"name": "Wuhan University",
+		"city": "Wuhan, CN",
+		"degree": "BA",
+		"major": ["Biotechnology"],
+		"dates": 2004,
+		"url": "http://www.whu.edu.cn"
+	  }
+    ],
+    "onlineCourse": [
+      {
+      	"title": "Front-End Web Developer Nanodegree",
+      	"school": "Udacity",
+        "dates": 2016,  
+        "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001" 
+      }
+    ]
+}
+
+var work = {
+
+}
+
+
+var project = {
+	
+}

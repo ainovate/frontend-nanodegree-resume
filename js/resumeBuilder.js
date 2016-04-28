@@ -56,7 +56,6 @@ bio.display = function() {
 bio.display();
 
 
-
 //----------work----------//
 
 var work = {
@@ -78,6 +77,7 @@ var work = {
 work.display = function() {
 	work.jobs.forEach(function(job) {
 		$("#workExperience").append(HTMLworkStart);
+
 		var employer = HTMLworkEmployer.replace("%data%", job.employer);
 		var title = HTMLworkTitle.replace("%data%", job.title);
 		var dates = HTMLworkDates.replace("%data%", job.dates);
@@ -93,34 +93,38 @@ work.display();
 
 //----------project----------//
 
-var project = {
+var projects = {
 	"projects": [{
 		"title": "Build a Portfolio Site",
 		"dates": "March 2016",
-		"decription": "You will be provided with a design mockup as a PDF-file and must replicate that design in HTML and CSS. You will develop a responsive website that will display images, descriptions and links to each of the portfolio projects you will complete throughout the course of the Front-End Web Developer Nanodegree.",
-		"images": "images/build%20portfolio.png"
+		"description": "You will be provided with a design mockup as a PDF-file and must replicate that design in HTML and CSS. You will develop a responsive website that will display images, descriptions and links to each of the portfolio projects you will complete throughout the course of the Front-End Web Developer Nanodegree.",
+		"images": "images/protfolio.png"
 	}, {
 		"title": "Online Resume",
 		"dates": "April 2016",
-		"decription": "Once you've mastered the skills of a front end web developer you'll want to make a great first impression. You need a resume that stands out. The resume you build will not only help you build important skills, but will also make it easy to show employers why you’re perfect for the job.As you progress through this Nanodegree program you can update this resume with your new skills and projects.",
-		"images": "images/interactive%20resume.png"
+		"description": "Once you've mastered the skills of a front end web developer you'll want to make a great first impression. You need a resume that stands out. The resume you build will not only help you build important skills, but will also make it easy to show employers why you’re perfect for the job.As you progress through this Nanodegree program you can update this resume with your new skills and projects.",
+		"images": "images/online%20resume.png"
 	}]
-}
+};
 
-project.display = function() {
-	project.projects.forEach(function(pro) {
-		$("#project").append(HTMLprojectStart);
-		var title = HTMLprojectTitle.replace("%data%", project.projects.title)
+projects.display = function() {
+	projects.projects.forEach(function(project) {
+		$("#projects").append(HTMLprojectStart);
+
+		var title = HTMLprojectTitle.replace("%data%", project.title);
 		$(".project-entry:last").append(title);
-		var dates = HTMLprojectDates.replace("%data%", project.projects.dates)
+		var dates = HTMLprojectDates.replace("%data%", project.dates);
 		$(".project-entry:last").append(dates);
-
-
+		var description = HTMLprojectDescription.replace("%data%", project.description);
+		$(".project-entry:last").append(description);
+		var images = HTMLprojectImage.replace("%data%", project.images);
+		$(".project-entry:last").append(images);
 
 	});
 };
 
-project.display();
+projects.display();
+
 
 //----------education----------//
 
@@ -139,11 +143,11 @@ var education = {
 		"dates": 2016,
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}]
-}
+};
 
 education.display = function() {
 	$("#education").append(HTMLschoolStart);
-	for (var school in education.schools) {
+	for (var sch in education.schools) {
 		var name = HTMLschoolName.replace("%data%", education.schools[school].name);
 		var degree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
 		var dates = HTMLschoolDates.replace("%data%", education.schools[school].dates);

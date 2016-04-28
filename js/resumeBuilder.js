@@ -1,3 +1,5 @@
+'use strict';
+
 //---------bio----------//
 
 var bio = {
@@ -24,15 +26,15 @@ bio.display = function() {
 	$("#header").prepend(formattedName);
 
 	var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-	$("#topContacts").append(formattedMobile);
+	$("#topContacts, #footerContacts").append(formattedMobile);
 	var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-	$("#topContacts").append(formattedEmail);
+	$("#topContacts, #footerContacts").append(formattedEmail);
 	var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-	$("#topContacts").append(formattedGithub);
+	$("#topContacts, #footerContacts").append(formattedGithub);
 	var formattedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-	$("#topContacts").append(formattedTwitter);
+	$("#topContacts, #footerContacts").append(formattedTwitter);
 	var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-	$("#topContacts").append(formattedLocation);
+	$("#topContacts, #footerContacts").append(formattedLocation);
 	var welcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
 	$("#header").append(welcomeMessage);
 	var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
@@ -63,13 +65,13 @@ var work = {
 		"employer": "MyFashion",
 		"title": "Accountant",
 		"dates": "2013 - present",
-		"location": "Nantong JS",
+		"location": "Nantong, CN",
 		"description": "My job involves keeping financial records for a business."
 	}, {
 		"employer": "Freelance",
 		"title": "Gift design",
 		"dates": "2000 - 2013",
-		"location": "Nantong JS",
+		"location": "Nantong, CN",
 		"description": "Make individual gift desgin for client."
 	}]
 }
@@ -131,51 +133,47 @@ projects.display();
 var education = {
 	"schools": [{
 		"name": "Wuhan University",
+		"degree": "Bachelors",
+		"dates": "2004 - 2008",
 		"location": "Wuhan, CN",
-		"degree": "BA",
 		"majors": ["Biotechnology"],
-		"dates": 2004,
 		"url": "http://www.whu.edu.cn"
 	}],
+
 	"onlineCourses": [{
 		"title": "Front-End Web Developer Nanodegree",
 		"school": "Udacity",
-		"dates": 2016,
+		"dates": "2016",
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}]
 };
 
 education.display = function() {
-	education.schools.forEach(function(education) {
-		$("#education").append(HTMLschoolStart);
-
-		var name = HTMLschoolName.replace("%data%", education.name);
-		$(".education-entry:last").append(name);
-		var degree = HTMLschoolDegree.replace("%data%", education.degree);
-		$(".education-entry:last").append(degree);
-		var dates = HTMLschoolDates.replace("%data%", education.dates);
-		$(".education-entry:last").append(dates);
-		var location = HTMLschoolLocation.replace("%data%", education.location);
-		$(".education-entry:last").append(location);
-		var majors = HTMLschoolMajor.replace("%data%", education.majors);
-		$(".education-entry:last").append(majors);
-		var url = HTMLschoolUrl.replace("%data%", education.url);
-		$(".education-entry:last").append(url);
-
-	});
+	$("#education").append(HTMLschoolStart);
+	for (var school in education.schools) {
+		var name = HTMLschoolName.replace("%data%", education.schools[school].name);
+		var degree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
+		var dates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
+		var city = HTMLschoolLocation.replace("%data%", education.schools[school].location);
+		var majors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
+		var url = HTMLschoolUrl.replace("%data%", education.schools[school].url);
+		$(".education-entry:last").append(name + degree + dates + city + majors + url);
+	}
 
 	$("#education").append(HTMLonlineClasses);
-
-	for (var online in education.online) {
+	for (var online in education.onlineCourses) {
 		$("#education").append(HTMLschoolStart);
-		var title = HTMLonlineTitle.replace("%data%", education.online[online].title);
-		var school = HTMLonlineSchool.replace("%data%", education.online[online].school);
-		var date = HTMLonlineDates.replace("%data%", education.online[online].date);
-		var url = HTMLonlineURL.replace("%data%", education.online[online].url);
-		$(".education-entry:last").append(title, school, date, url);
+		var title = HTMLonlineTitle.replace("%data%", education.onlineCourses[online].title);
+		var school = HTMLonlineSchool.replace("%data%", education.onlineCourses[online].school);
+		var date = HTMLonlineDates.replace("%data%", education.onlineCourses[online].dates);
+		var url = HTMLonlineURL.replace("%data%", education.onlineCourses[online].url);
+		$(".education-entry:last").append(title + school + date + url);
 	}
 };
 
 education.display();
+
+
+//----------map----------//
 
 $("#mapDiv").append(googleMap);

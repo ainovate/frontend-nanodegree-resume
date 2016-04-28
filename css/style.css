@@ -104,6 +104,10 @@ a {
   display: none;
 }
 
+#skills {
+  display: inline;
+}
+
 .orange {
   background-color: #f5ae23;
 }

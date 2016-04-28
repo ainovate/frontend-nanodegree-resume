@@ -131,13 +131,13 @@ projects.display();
 var education = {
 	"schools": [{
 		"name": "Wuhan University",
-		"city": "Wuhan, CN",
+		"location": "Wuhan, CN",
 		"degree": "BA",
-		"major": ["Biotechnology"],
+		"majors": ["Biotechnology"],
 		"dates": 2004,
 		"url": "http://www.whu.edu.cn"
 	}],
-	"onlineCourse": [{
+	"onlineCourses": [{
 		"title": "Front-End Web Developer Nanodegree",
 		"school": "Udacity",
 		"dates": 2016,
@@ -146,18 +146,26 @@ var education = {
 };
 
 education.display = function() {
-	$("#education").append(HTMLschoolStart);
-	for (var sch in education.schools) {
-		var name = HTMLschoolName.replace("%data%", education.schools[school].name);
-		var degree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-		var dates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-		var city = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-		var majors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-		var url = HTMLschoolUrl.replace("%data%", education.schools[school].url);
-		$(".education-entry:last").append(name + degree + dates + city + majors + url);
-	}
+	education.schools.forEach(function(education) {
+		$("#education").append(HTMLschoolStart);
+
+		var name = HTMLschoolName.replace("%data%", education.name);
+		$(".education-entry:last").append(name);
+		var degree = HTMLschoolDegree.replace("%data%", education.degree);
+		$(".education-entry:last").append(degree);
+		var dates = HTMLschoolDates.replace("%data%", education.dates);
+		$(".education-entry:last").append(dates);
+		var location = HTMLschoolLocation.replace("%data%", education.location);
+		$(".education-entry:last").append(location);
+		var majors = HTMLschoolMajor.replace("%data%", education.majors);
+		$(".education-entry:last").append(majors);
+		var url = HTMLschoolUrl.replace("%data%", education.url);
+		$(".education-entry:last").append(url);
+
+	});
 
 	$("#education").append(HTMLonlineClasses);
+
 	for (var online in education.online) {
 		$("#education").append(HTMLschoolStart);
 		var title = HTMLonlineTitle.replace("%data%", education.online[online].title);

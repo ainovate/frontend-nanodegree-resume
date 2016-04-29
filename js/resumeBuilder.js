@@ -16,7 +16,7 @@ var bio = {
 	"welcomeMessage": "Shut up and take my money!",
 	"skills": ["joking", "procrastinate everyting", "playing guitar", "movie fan"],
 	"biopic": "images/fry.jpg"
-}
+};
 
 bio.display = function() {
 
@@ -41,16 +41,10 @@ bio.display = function() {
 	$("#header").append(formattedBioPic);
 
 	if (bio.skills.length > 0) {
-
 		$("#header").append(HTMLskillsStart);
-
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-		$("#skills").append(formattedSkill);
-		formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
+	}
+	for (var i = 0; i < bio.skills.length; i++) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
 		$("#skills").append(formattedSkill);
 	}
 };
@@ -74,7 +68,7 @@ var work = {
 		"location": "Nantong, CN",
 		"description": "Make individual gift desgin for client."
 	}]
-}
+};
 
 work.display = function() {
 	work.jobs.forEach(function(job) {
@@ -99,13 +93,22 @@ var projects = {
 	"projects": [{
 		"title": "Build a Portfolio Site",
 		"dates": "March 2016",
-		"description": "You will be provided with a design mockup as a PDF-file and must replicate that design in HTML and CSS. You will develop a responsive website that will display images, descriptions and links to each of the portfolio projects you will complete throughout the course of the Front-End Web Developer Nanodegree.",
-		"images": "images/protfolio.png"
+		"description": "You will be provided with a design mockup as a PDF-file" +
+			"and must replicate that design in HTML and CSS. You will develop a" +
+			"responsive website that will display images, descriptions and links" +
+			"to each of the portfolio projects you will complete throughout the" +
+			"course of the Front-End Web Developer Nanodegree.",
+		"images": ["images/protfolio.png"]
 	}, {
 		"title": "Online Resume",
 		"dates": "April 2016",
-		"description": "Once you've mastered the skills of a front end web developer you'll want to make a great first impression. You need a resume that stands out. The resume you build will not only help you build important skills, but will also make it easy to show employers why you’re perfect for the job.As you progress through this Nanodegree program you can update this resume with your new skills and projects.",
-		"images": "images/online%20resume.png"
+		"description": "Once you've mastered the skills of a front end web developer" +
+			"you'll want to make a great first impression. You need a resume that stands" +
+			"out. The resume you build will not only help you build important skills," +
+			"but will also make it easy to show employers why you’re perfect for the" +
+			"job.As you progress through this Nanodegree program you can update this" +
+			"resume with your new skills and projects.",
+		"images": ["images/online%20resume.png"]
 	}]
 };
 
@@ -143,32 +146,54 @@ var education = {
 	"onlineCourses": [{
 		"title": "Front-End Web Developer Nanodegree",
 		"school": "Udacity",
-		"dates": "2016",
+		"date": "2016",
 		"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
 	}]
 };
 
 education.display = function() {
-	$("#education").append(HTMLschoolStart);
-	for (var school in education.schools) {
-		var name = HTMLschoolName.replace("%data%", education.schools[school].name);
-		var degree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-		var dates = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-		var city = HTMLschoolLocation.replace("%data%", education.schools[school].location);
-		var majors = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
-		var url = HTMLschoolUrl.replace("%data%", education.schools[school].url);
-		$(".education-entry:last").append(name + degree + dates + city + majors + url);
+	var formals = education.schools;
+	var onlines = education.onlineCourses;
+	var name, degree, dates, location, majors, url, title, school, date;
+
+	formals.forEach(addFormal);
+	onlines.forEach(addOnline);
+	$("#education").append(HTMLonlineClasses);
+
+	function addFormal(school) {
+		name = HTMLschoolName.replace('%data%', school.name);
+		degree = HTMLschoolDegree.replace('%data%', school.degree);
+		dates = HTMLschoolDates.replace('%data%', school.dates);
+		location = HTMLschoolLocation.replace('%data%', school.location);
+		majors = HTMLschoolMajor.replace('%data%', school.majors);
+
+		$('#education').append(HTMLschoolStart);
+
+		$('.education-entry:last').append(name + degree);
+
+		$('.education-entry:last').append(dates);
+
+		$('.education-entry:last').append(location);
+
+		$('.education-entry:last').append(majors);
 	}
 
-	$("#education").append(HTMLonlineClasses);
-	for (var online in education.onlineCourses) {
-		$("#education").append(HTMLschoolStart);
-		var title = HTMLonlineTitle.replace("%data%", education.onlineCourses[online].title);
-		var school = HTMLonlineSchool.replace("%data%", education.onlineCourses[online].school);
-		var date = HTMLonlineDates.replace("%data%", education.onlineCourses[online].dates);
-		var url = HTMLonlineURL.replace("%data%", education.onlineCourses[online].url);
-		$(".education-entry:last").append(title + school + date + url);
+	function addOnline(course) {
+		title = HTMLonlineTitle.replace('%data%', course.title);
+		school = HTMLonlineSchool.replace('%data%', course.school);
+		date = HTMLonlineDates.replace('%data%', course.date);
+		url = HTMLonlineURL.replace('%data%', course.url);
+
+		$('#education').append(HTMLschoolStart);
+
+		$('.education-entry:last').append(title + school);
+
+		$('.education-entry:last').append(date);
+
+		$('.education-entry:last').append(url);
 	}
+
+
 };
 
 education.display();
